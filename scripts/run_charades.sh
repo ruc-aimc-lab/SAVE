@@ -30,7 +30,7 @@ python -m torch.distributed.launch \
     --epochs=5 --batch_size="${BATCH_SIZE}" --n_display=2 \
     --train_csv "${DATA_PATH}/Annotations/Charades_v1_train.csv" \
     --val_csv   "${DATA_PATH}/Annotations/Charades_v1_test.csv" \
-    --features_path "${DATA_PATH}/ImageData" \
+    --features_path "${DATA_PATH}/VideoData" \
     --audio_path    "${DATA_PATH}/AudioData" \
     --asr_path      "${DATA_PATH}/charades_vad_text.json" \
     --lr 1e-4 --coef_lr 1e-3 \

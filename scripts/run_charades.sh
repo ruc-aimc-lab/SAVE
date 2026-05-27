@@ -32,7 +32,7 @@ python -m torch.distributed.launch \
     --val_csv   "${DATA_PATH}/Annotations/Charades_v1_test.csv" \
     --features_path "${DATA_PATH}/VideoData" \
     --audio_path    "${DATA_PATH}/AudioData" \
-    --asr_path      "${DATA_PATH}/charades_vad_text.json" \
+    --asr_path      "${DATA_PATH}/charades_asr_text.json" \
     --lr 1e-4 --coef_lr 1e-3 \
     --max_words 64 --max_frames 32 --batch_size_val 32 \
     --datatype charades --expand_msrvtt_sentences \

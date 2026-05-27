@@ -52,12 +52,13 @@ DATASET_CONFIG = {
         "test_csv":     "Annotations/MSRVTT_JSFUSION_test.csv",
         "asr_json":     "msrvtt10k_asr_text.json",
     },
-    # "vatex": {
-    #     "caption_json": "Annotations/<...>.json",
-    #     "train_csv":    "Annotations/<...>.csv",
-    #     "test_csv":     "Annotations/<...>.csv",
-    #     "asr_json":     "<...>.json",
-    # },
+    "vatex": {
+        "caption_json": "Annotations/VATEX_data.json",
+        "train_csv":    "Annotations/VATEX_train.csv",
+        "val_csv":      "Annotations/VATEX_val.csv",
+        "test_csv":     "Annotations/VATEX_test.csv",
+        "asr_json":     "vatex_asr_text.json",
+    },
     "charades": {
         "train_csv":    "Annotations/Charades_v1_train.csv",
         "test_csv":     "Annotations/Charades_v1_test.csv",
@@ -115,7 +116,7 @@ def _collect_required_ids(data_root, cfg):
     common ones in order of preference.
     """
     ids = set()
-    for csv_rel in [cfg.get("train_csv"), cfg.get("test_csv")]:
+    for csv_rel in [cfg.get("train_csv"), cfg.get("val_csv"), cfg.get("test_csv")]:
         if csv_rel is None:
             continue
         path = os.path.join(data_root, csv_rel)
@@ -152,18 +153,18 @@ def main():
     annot_items = [
         (os.path.join(data_root, rel) if rel else None,
          os.path.basename(rel) if rel else None)
-        for rel in (cfg.get("caption_json"), cfg.get("train_csv"),
+        for rel in (cfg.get("caption_json"), cfg.get("train_csv"), cfg.get("val_csv"),
                     cfg.get("test_csv"), cfg.get("asr_json"))
     ]
     _check_files_exist(annot_items, errors, "Annotations & ASR")
 
     if any(rel and not os.path.exists(os.path.join(data_root, rel))
-           for rel in (cfg.get("train_csv"), cfg.get("test_csv"))):
-        print("\nFATAL: missing train/test split. Stop.")
+           for rel in (cfg.get("train_csv"), cfg.get("val_csv"), cfg.get("test_csv"))):
+        print("\nFATAL: missing train/val/test split. Stop.")
         sys.exit(1)
 
     # Per-id presence.
-    print(f"\n## Per-id presence (train + test of {args.dataset})")
+    print(f"\n## Per-id presence (train + val + test of {args.dataset})")
     ids = _collect_required_ids(data_root, cfg)
     print(f"  required video_ids = {len(ids)}")
 

@@ -54,7 +54,9 @@ Use **MSR-VTT** as the running example below; the same recipe applies to VATEX, 
   ```
   This populates `data/msrvtt/AudioData/`. Clips with no audio track are skipped; the dataloader substitutes `silent_file.wav` at training time.
 
-+ **Teacher features (ImageBind).** Clone [ImageBind](https://github.com/facebookresearch/ImageBind) locally, then extract per-clip teacher features:
++ **Teacher features (ImageBind).** We have already extracted and uploaded the teacher features to the [Google Drive](https://drive.google.com/drive/folders/18Y0qnpsVNxCWPR-ePzqTG4uW3s4Xkvsn?usp=sharing). You simply need to download and place them under `data/msrvtt/FeatureData/`. 
+
+  *(Optional)* If you prefer to extract them from scratch, clone [ImageBind](https://github.com/facebookresearch/ImageBind) locally and run our script:
   ```shell
   IMAGEBIND_DIR=/path/to/ImageBind bash fe.sh
   ```

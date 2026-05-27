@@ -4,18 +4,17 @@
 # Override via env (all optional):
 #   DATA_PATH=./data/msrvtt
 #   OUTPUT_DIR=./outputs/save_msrvtt9k
-#   NPROC=2                    # number of GPUs
-#   CUDA_VISIBLE_DEVICES=0,1   # which GPUs
+#   NPROC=4                    # number of GPUs
+#   CUDA_VISIBLE_DEVICES=0,1,2,3   # which GPUs
 #   BATCH_SIZE=128             # global batch size (across GPUs)
 #
-# Defaults match the paper (4 GPUs, BS=128). On fewer GPUs we keep BS=128
-# (per-GPU batch grows accordingly). See README §Training for details.
+# Defaults match the paper (4 GPUs, BS=128). See README §Training for details.
 
 set -e
 
 DATA_PATH="${DATA_PATH:-./data/msrvtt}"
 OUTPUT_DIR="${OUTPUT_DIR:-./outputs/save_msrvtt9k}"
-NPROC="${NPROC:-2}"
+NPROC="${NPROC:-4}"
 BATCH_SIZE="${BATCH_SIZE:-128}"
 
 export MKL_NUM_THREADS="${MKL_NUM_THREADS:-24}"

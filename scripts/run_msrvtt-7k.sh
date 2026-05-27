@@ -5,7 +5,7 @@ set -e
 
 DATA_PATH="${DATA_PATH:-./data/msrvtt}"
 OUTPUT_DIR="${OUTPUT_DIR:-./outputs/save_msrvtt7k}"
-NPROC="${NPROC:-2}"
+NPROC="${NPROC:-4}"
 BATCH_SIZE="${BATCH_SIZE:-128}"
 
 export MKL_NUM_THREADS="${MKL_NUM_THREADS:-24}"

@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
-# Train SAVE on the Charades-Audio split.
+# Train SAVE on the Charades split.
 #
 # Override via env (all optional):
 #   DATA_PATH=./data/charades
 #   OUTPUT_DIR=./outputs/save_charades
-#   NPROC=2
+#   NPROC=4
 #   BATCH_SIZE=64
 set -e
 
 DATA_PATH="${DATA_PATH:-./data/charades}"
 OUTPUT_DIR="${OUTPUT_DIR:-./outputs/save_charades}"
-NPROC="${NPROC:-2}"
+NPROC="${NPROC:-4}"
 BATCH_SIZE="${BATCH_SIZE:-64}"
 
 export MKL_NUM_THREADS="${MKL_NUM_THREADS:-24}"

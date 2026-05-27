@@ -600,9 +600,9 @@ class CLIP(nn.Module):
 
     @staticmethod
     def get_config(pretrained_clip_name="ViT-B/32"):
-        model_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "ViT-B-32.pt")
+        model_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../pretrained/CLIP/ViT-B-32.pt")
         if pretrained_clip_name in _MODELS and pretrained_clip_name in _PT_NAME:
-            model_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), _PT_NAME[pretrained_clip_name])
+            model_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../pretrained/CLIP/"+_PT_NAME[pretrained_clip_name])
 
         if pretrained_clip_name in ["ViT-B/32", "ViT-B/16"] and os.path.exists(model_path):
             pass

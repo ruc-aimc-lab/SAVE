@@ -58,7 +58,11 @@ DATASET_CONFIG = {
     #     "test_csv":     "Annotations/<...>.csv",
     #     "asr_json":     "<...>.json",
     # },
-    # "charades": { ... },
+    "charades": {
+        "train_csv":    "Annotations/Charades_v1_train.csv",
+        "test_csv":     "Annotations/Charades_v1_test.csv",
+        "asr_json":     "charades_asr_text.json",
+    },
     # "lsmdc":    { ... },
 }
 
@@ -111,7 +115,7 @@ def _collect_required_ids(data_root, cfg):
     common ones in order of preference.
     """
     ids = set()
-    for csv_rel in [cfg["train_csv"], cfg["test_csv"]]:
+    for csv_rel in [cfg.get("train_csv"), cfg.get("test_csv")]:
         if csv_rel is None:
             continue
         path = os.path.join(data_root, csv_rel)
@@ -148,13 +152,13 @@ def main():
     annot_items = [
         (os.path.join(data_root, rel) if rel else None,
          os.path.basename(rel) if rel else None)
-        for rel in (cfg["caption_json"], cfg["train_csv"],
-                    cfg["test_csv"], cfg["asr_json"])
+        for rel in (cfg.get("caption_json"), cfg.get("train_csv"),
+                    cfg.get("test_csv"), cfg.get("asr_json"))
     ]
     _check_files_exist(annot_items, errors, "Annotations & ASR")
 
     if any(rel and not os.path.exists(os.path.join(data_root, rel))
-           for rel in (cfg["train_csv"], cfg["test_csv"])):
+           for rel in (cfg.get("train_csv"), cfg.get("test_csv"))):
         print("\nFATAL: missing train/test split. Stop.")
         sys.exit(1)
 

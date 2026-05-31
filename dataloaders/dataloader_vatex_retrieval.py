@@ -80,21 +80,13 @@ class VATEX_DataLoader(Dataset):
 
         video_dict = {}
         for entry in os.scandir(self.features_path):
-            if not entry.is_dir():
-                continue
-            video_id_ = entry.name
-            if video_id_ not in video_ids:
-                continue
-            video_dict[video_id_] = entry.path
-
-        # for root, dub_dir, video_files in os.walk(self.features_path):
-        #     for video_file in video_files:
-        #         video_id_ = ".".join(video_file.split(".")[:-1])
-        #         if video_id_:
-        #         if video_id_ not in video_ids:
-        #             continue
-        #         file_path_ = os.path.join(root, video_file)
-        #         video_dict[video_id_] = file_path_
+            if entry.is_dir():
+                video_id_ = entry.name
+            else:
+                video_id_ = ".".join(entry.name.split(".")[:-1])
+                
+            if video_id_ in video_ids:
+                video_dict[video_id_] = entry.path
         self.video_dict = video_dict
 
         self.sample_len = 0
